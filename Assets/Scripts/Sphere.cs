@@ -27,10 +27,15 @@ public class NewBehaviourScript : MonoBehaviour
 
     double[] cs;
     double[] ds;
+
+    double compute_accel(double x)
+    {
+        return -k_by_m * x;
+    }
     void Start()
     {
         transform.position = new Vector3((float) x, 0, 0);
-        a = -k_by_m * x;
+        a = compute_accel(x);
 
         cs = new double[4] {0.5, 0.5*(1.0-c), 0.5*(1.0-c), 0.5};
         ds = new double[4] {0.0,         1.0,          -c, 1.0};
@@ -50,10 +55,12 @@ public class NewBehaviourScript : MonoBehaviour
         } else if (upd_cnt == 1) {
             Debug.Log(string.Format("P1 a = {0}, v = {1}, x = {2}", a, v, transform.position.x));
         }
-        x += (float) (v * dt);
+        for (int i = 0; i < cs.GetLength(0); i++) {
+            a = compute_accel(x);
+            v += ds[i] * a * dt;
+            x += cs[i] * v * dt;
+        }
         transform.position = new Vector3((float) x, transform.position.y, transform.position.z);
-        v += a * dt;
-        a = -k_by_m * x;
         upd_cnt += 1;
     }
 }
