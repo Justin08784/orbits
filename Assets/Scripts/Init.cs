@@ -17,10 +17,4 @@ public class Init : MonoBehaviour
         GravityManager.register_body(sphere1);
         // GravityManager.register_body(sphere2);
     }
-
-    // // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
 }
