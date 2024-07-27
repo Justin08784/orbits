@@ -9,9 +9,11 @@ using UnityEngine.Assertions;
 
 
 
-public class NewBehaviourScript : MonoBehaviour
+public class Sphere : MonoBehaviour
 {
     // Start is called before the first frame update
+    // public Vector3 v;
+    // public Vector3 r;
 
     private double v = 0;
     private double x = 1;
