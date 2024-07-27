@@ -42,19 +42,18 @@ public class GravityManager : MonoBehaviour
     {
         bodies.Add(sphere);
     }
-    double compute_accel(double x)
+    Vector3 compute_accel(Vector3 r)
     {
-        double k_by_m = 1; // k / m
-        return -k_by_m * x;
+        return r * (float) -Math.Pow(r.magnitude, 3.0);
     }
 
     void FixedUpdate()
     {
         Sphere curr_body = bodies[0];
         for (int i = 0; i < cs.GetLength(0); i++) {
-            double a = compute_accel(curr_body.r.x);
-            curr_body.v.x += (float) (ds[i] * a * dt);
-            curr_body.r.x += (float) (cs[i] * curr_body.v.x * dt);
+            Vector3 a = compute_accel(curr_body.r);
+            curr_body.v += a * (float) (ds[i] * dt);
+            curr_body.r += curr_body.v * (float) (cs[i] * dt);
         }
         upd_cnt += 1;
     }
