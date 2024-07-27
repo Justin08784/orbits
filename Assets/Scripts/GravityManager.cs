@@ -63,21 +63,30 @@ public class GravityManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        // for (int body_idx = 0; body_idx < bodies.Count; body_idx++) { 
-        //     Sphere curr_body = bodies[body_idx];
-        //     for (int i = 0; i < cs.GetLength(0); i++) {
+        // without substep tmps (has processing order bias)
+        // for (int i = 0; i < cs.GetLength(0); i++) {
+        //     for (int body_idx = 0; body_idx < bodies.Count; body_idx++) { 
+        //         Sphere curr_body = bodies[body_idx];
         //         Vector3 a = compute_accel(body_idx);
         //         curr_body.v += a * (float) (ds[i] * dt);
         //         curr_body.r += curr_body.v * (float) (cs[i] * dt);
         //     }
         // }
 
+        // with substep tmps (solves processing order bias)
         for (int i = 0; i < cs.GetLength(0); i++) {
             for (int body_idx = 0; body_idx < bodies.Count; body_idx++) { 
                 Sphere curr_body = bodies[body_idx];
                 Vector3 a = compute_accel(body_idx);
-                curr_body.v += a * (float) (ds[i] * dt);
-                curr_body.r += curr_body.v * (float) (cs[i] * dt);
+                curr_body.tmp_v += a * (float) (ds[i] * dt);
+                curr_body.tmp_r += curr_body.tmp_v * (float) (cs[i] * dt);
+                // Debug.Log(string.Format("bdy: {0}, a: {1}", body_idx, a));
+            }
+
+            for (int body_idx = 0; body_idx < bodies.Count; body_idx++) { 
+                Sphere curr_body = bodies[body_idx];
+                curr_body.v = curr_body.tmp_v;
+                curr_body.r = curr_body.tmp_r;
             }
         }
         upd_cnt += 1;
