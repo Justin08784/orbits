@@ -23,6 +23,8 @@ public class Init : MonoBehaviour
             ds[i] /= divisor;
         }
 
+        Instantiate(body, new Vector3(2, 0, 0), Quaternion.identity);
+
         // for (int y=0; y<height; ++y)
         // {
         //     for (int x=0; x<width; ++x)

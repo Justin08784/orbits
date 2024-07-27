@@ -36,7 +36,7 @@ public class Sphere : MonoBehaviour
     }
     void Start()
     {
-        transform.position = new Vector3((float) x, 0, 0);
+        x = transform.position.x;
         a = compute_accel(x);
 
         cs = new double[4] {0.5, 0.5*(1.0-c), 0.5*(1.0-c), 0.5};
@@ -49,8 +49,7 @@ public class Sphere : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (upd_cnt == 0) {       
             Debug.Log(string.Format("P0 a = {0}, v = {1}, x = {2}", a, v, transform.position.x));
