@@ -49,11 +49,13 @@ public class GravityManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        Sphere curr_body = bodies[0];
-        for (int i = 0; i < cs.GetLength(0); i++) {
-            Vector3 a = compute_accel(curr_body.r);
-            curr_body.v += a * (float) (ds[i] * dt);
-            curr_body.r += curr_body.v * (float) (cs[i] * dt);
+        for (int body_idx = 0; body_idx < bodies.Count; body_idx++) { 
+            Sphere curr_body = bodies[body_idx];
+            for (int i = 0; i < cs.GetLength(0); i++) {
+                Vector3 a = compute_accel(curr_body.r);
+                curr_body.v += a * (float) (ds[i] * dt);
+                curr_body.r += curr_body.v * (float) (cs[i] * dt);
+            }
         }
         upd_cnt += 1;
     }
