@@ -15,7 +15,7 @@ public class Sphere : MonoBehaviour
     // public Vector3 v;
     // public Vector3 r;
 
-    private double v = 0;
+    public double v = 0;
     private double x = 1;
     private double a = 0;
 

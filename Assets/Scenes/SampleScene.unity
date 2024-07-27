@@ -245,7 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1609de9eff2b545bc8da0a89c2d31741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 7542758454560160788, guid: a82bdf22a5667414da3de2677da0ae86, type: 3}
+  Sphere_Prefab: {fileID: 7542758454560160788, guid: a82bdf22a5667414da3de2677da0ae86, type: 3}
+  Gravity_Manager_Prefab: {fileID: 2143995702170013783, guid: f1976c271dff3469cbb9cae501313724, type: 3}
 --- !u!4 &836323927
 Transform:
   m_ObjectHideFlags: 0
