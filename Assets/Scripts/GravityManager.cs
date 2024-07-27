@@ -5,7 +5,7 @@ using UnityEngine;
 public class GravityManager : MonoBehaviour
 {
     private static GravityManager Instance; // there should be only 1 manager
-    private static List<Sphere> bodies;
+    private static List<Sphere> bodies = new();
 
     private readonly double c = Math.Pow(2.0, 1.0/3.0);
 
