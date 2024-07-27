@@ -15,7 +15,7 @@ public class GravityManager : MonoBehaviour
 
     private double dt = 0.01;
 
-    private int upd_cnt = 0;
+    private uint upd_cnt = 0;
 
     private void Awake()
     {
@@ -42,17 +42,40 @@ public class GravityManager : MonoBehaviour
     {
         bodies.Add(sphere);
     }
-    Vector3 compute_accel(Vector3 r)
+    Vector3 compute_accel(int body_idx)
     {
-        return r * (float) -Math.Pow(r.magnitude, 3.0);
+        Sphere curr_body = bodies[body_idx];
+        Vector3 r = curr_body.r;
+        Vector3 a = Vector3.zero;
+
+        for (int i = 0; i < bodies.Count; i++) {
+            if (i == body_idx) 
+                continue;
+            
+            Sphere other_body = bodies[i];
+            Vector3 displacement = other_body.r - r;
+
+            a += displacement * (float) Math.Pow(displacement.magnitude, 3.0);
+        }
+
+        return a;
     }
 
     void FixedUpdate()
     {
-        for (int body_idx = 0; body_idx < bodies.Count; body_idx++) { 
-            Sphere curr_body = bodies[body_idx];
-            for (int i = 0; i < cs.GetLength(0); i++) {
-                Vector3 a = compute_accel(curr_body.r);
+        // for (int body_idx = 0; body_idx < bodies.Count; body_idx++) { 
+        //     Sphere curr_body = bodies[body_idx];
+        //     for (int i = 0; i < cs.GetLength(0); i++) {
+        //         Vector3 a = compute_accel(body_idx);
+        //         curr_body.v += a * (float) (ds[i] * dt);
+        //         curr_body.r += curr_body.v * (float) (cs[i] * dt);
+        //     }
+        // }
+
+        for (int i = 0; i < cs.GetLength(0); i++) {
+            for (int body_idx = 0; body_idx < bodies.Count; body_idx++) { 
+                Sphere curr_body = bodies[body_idx];
+                Vector3 a = compute_accel(body_idx);
                 curr_body.v += a * (float) (ds[i] * dt);
                 curr_body.r += curr_body.v * (float) (cs[i] * dt);
             }

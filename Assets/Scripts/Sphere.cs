@@ -16,6 +16,11 @@ public class Sphere : MonoBehaviour
         r = transform.position;
     }
 
+    public void set_v(Vector3 new_v)
+    {
+        v = new_v;
+    }
+
     void FixedUpdate()
     {
         transform.position = r;
