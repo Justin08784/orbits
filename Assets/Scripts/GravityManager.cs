@@ -10,14 +10,20 @@ public class GravityManager : MonoBehaviour
 
     private readonly double c = Math.Pow(2.0, 1.0/3.0);
 
-    double[] cs;
-    double[] ds;
+    /* integrator coeffs */
+    double[] cs; // displacement update coeffs
+    double[] ds; // velocity update coeffs
+
+    private double dt = 0.01;
+
+    private int upd_cnt = 0;
 
     private void Awake()
     {
         if (Instance != null) {
             // manager already init
-            Destroy(this);   
+            Destroy(this); 
+            return;
         }
 
         Instance = this;
@@ -33,19 +39,24 @@ public class GravityManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        
-    }
-
     public static void register_body(Sphere sphere)
     {
         bodies.Add(sphere);
     }
-
-    // Update is called once per frame
-    void Update()
+    double compute_accel(double x)
     {
+        double k_by_m = 1; // k / m
+        return -k_by_m * x;
+    }
 
+    void FixedUpdate()
+    {
+        Sphere curr_body = bodies[0];
+        for (int i = 0; i < cs.GetLength(0); i++) {
+            double a = compute_accel(curr_body.r.x);
+            curr_body.v.x += (float) (ds[i] * a * dt);
+            curr_body.r.x += (float) (cs[i] * curr_body.v.x * dt);
+        }
+        upd_cnt += 1;
     }
 }
