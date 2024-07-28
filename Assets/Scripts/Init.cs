@@ -35,8 +35,6 @@ required to maintain circular orbit about a planet
 
 - Simulate orbital resonance on Jupiter
 
-- Explain substep tmps
-
 - Add mass
 
 */
