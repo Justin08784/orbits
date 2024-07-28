@@ -14,7 +14,7 @@ public class Sphere : MonoBehaviour
 
     private int upd_cnt = 0;
 
-    void Start()
+    void Awake()
     {
         v = Vector3.zero;
         r = transform.position;
@@ -25,16 +25,17 @@ public class Sphere : MonoBehaviour
     public void set_v(Vector3 new_v)
     {
         v = new_v;
+        tmp_v = new_v;
+    }
+
+    public void set_m(double new_m)
+    {
+        m = new_m;
     }
 
     void FixedUpdate()
     {
-        if (upd_cnt == 0) {
-            Debug.Log(string.Format("0__{0}: v: {1}", this, v));
-        } else if (upd_cnt == 1) {
-            Debug.Log(string.Format("1__{0}: v: {1}", this, v));
-        }
-
+        // Debug.Log(string.Format("r: {0} |||| v: {1}", r, v));
         transform.position = r;
         upd_cnt++;
     }

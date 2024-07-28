@@ -55,7 +55,7 @@ public class GravityManager : MonoBehaviour
             Sphere other_body = bodies[i];
             Vector3 displacement = other_body.r - r;
 
-            a += displacement * (float) Math.Pow(displacement.magnitude, 3.0);
+            a += (float) other_body.m * displacement * (float) Math.Pow(displacement.magnitude, 3.0);
         }
 
         return a;
