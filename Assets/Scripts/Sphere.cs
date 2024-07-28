@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -5,7 +6,12 @@ using UnityEngine;
 
 public class Sphere : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private static int num_bodies = 0;
+    
+    /* identifiers */
+    public int body_idx;
+    
+    /* physical properties */
     public Vector3 v;
     public Vector3 tmp_v;
     public Vector3 r;
@@ -20,6 +26,8 @@ public class Sphere : MonoBehaviour
         r = transform.position;
         tmp_v = v;
         tmp_r = r;
+
+        body_idx = num_bodies++;
     }
 
     public void set_v(Vector3 new_v)
@@ -35,7 +43,7 @@ public class Sphere : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Debug.Log(string.Format("r: {0} |||| v: {1}", r, v));
+        Debug.Log(string.Format("<{2}> r: {0} // v: {1}", r, v, body_idx));
         transform.position = r;
         upd_cnt++;
     }
