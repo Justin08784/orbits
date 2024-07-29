@@ -90,7 +90,7 @@ public class Sphere : MonoBehaviour
         // line_renderer.SetPositions(position_history.ToArray());
         
         Debug.Log(string.Format("<{2}> r: {0} // v: {1}", r, v, body_idx));
-        transform.position = r;
+        transform.position = r / Distances.earth;
         upd_cnt++;
     }
 }

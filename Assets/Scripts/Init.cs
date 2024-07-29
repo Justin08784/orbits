@@ -45,7 +45,33 @@ public class Init : MonoBehaviour
     void Awake()
     {
         Instantiate(Gravity_Manager_Prefab, Vector3.zero, Quaternion.identity);
+
+        // sun
+        Sphere sphere1 = Instantiate(Sphere_Prefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<Sphere>();
+        // earth
+        Sphere sphere2 = Instantiate(Sphere_Prefab, new Vector3(Distances.earth, 0, 0), Quaternion.identity).GetComponent<Sphere>();
+        // jupiter
+        Sphere sphere3 = Instantiate(Sphere_Prefab, new Vector3(-5.367f * Distances.earth, 0, 0), Quaternion.identity).GetComponent<Sphere>();
+
+
+        sphere1.set_v(new Vector3(0, 0, 0));
+        sphere2.set_v(new Vector3(0, 0, 29800f));
+        sphere3.set_v(new Vector3(0, 0, -12440f));
         
+        sphere1.set_m(Masses.sun);
+        sphere2.set_m(Masses.earth);
+        sphere3.set_m(317.83 * Masses.earth);
+
+        sphere1.set_color(Color.yellow);
+        sphere2.set_color(Color.cyan);
+        sphere3.set_color(Color.red);
+
+        sphere1.set_stationary(true);
+
+        GravityManager.register_body(sphere1);
+        GravityManager.register_body(sphere2);
+        GravityManager.register_body(sphere3);
+
     }
 }
 
@@ -60,8 +86,13 @@ required to maintain circular orbit about a planet
 
 - Simulate orbital resonance on Jupiter
 
-- Add mass
-
 - Add acceleration/velocity vectors to demonstrate mutual planet interactions
+
+- Scale body sizes with scroll up/down (the bodies should maintain the same ratio of sizes though)
+
+- Add an option to remove 'g' from compute_accel so that the current presets can be used
+
+- Simulate moons (and submoons?)
+
 
 */

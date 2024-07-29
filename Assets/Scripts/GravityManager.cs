@@ -13,7 +13,7 @@ public class GravityManager : MonoBehaviour
     double[] cs; // displacement update coeffs
     double[] ds; // velocity update coeffs
 
-    private double dt = 1;
+    private double dt = 3600;
 
     private uint upd_cnt = 0;
 
@@ -55,7 +55,7 @@ public class GravityManager : MonoBehaviour
             Sphere other_body = bodies[i];
             Vector3 displacement = other_body.r - r;
 
-            a += (float) other_body.m * displacement * (float) Math.Pow(displacement.magnitude, -3.0);
+            a += (float) Physical_Constants.g * (float) other_body.m * displacement * (float) Math.Pow(displacement.magnitude, -3.0);
         }
 
         return a;
