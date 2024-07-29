@@ -13,7 +13,7 @@ public class GravityManager : MonoBehaviour
     double[] cs; // displacement update coeffs
     double[] ds; // velocity update coeffs
 
-    private double dt = 0.01;
+    private double dt = 1;
 
     private uint upd_cnt = 0;
 
