@@ -22,6 +22,25 @@ public class Init : MonoBehaviour
 
         sphere1.set_color(Color.yellow);
         sphere2.set_color(Color.cyan);
+
+        sphere1.set_stationary(true);
+
+        /* example: planet around star, elliptical orbit */
+        // Sphere sphere1 = Instantiate(Sphere_Prefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<Sphere>();
+        // Sphere sphere2 = Instantiate(Sphere_Prefab, new Vector3(-5, 0, 0), Quaternion.identity).GetComponent<Sphere>();
+
+        // sphere2.set_v(new Vector3(0, 0, -10));
+        // sphere1.set_v(new Vector3(0, 0, 0.4f));
+
+        // sphere1.set_m(1000);
+        // sphere2.set_m(0.1);
+
+        // sphere1.set_color(Color.yellow);
+        // sphere2.set_color(Color.cyan);
+
+        // sphere1.set_stationary(true);
+
+
         GravityManager.register_body(sphere1);
         GravityManager.register_body(sphere2);
     }

@@ -80,6 +80,9 @@ public class GravityManager : MonoBehaviour
             for (int body_idx = 0; body_idx < bodies.Count; body_idx++) {
                 // compute tmp values using last substep's 'architectural' values
                 Sphere curr_body = bodies[body_idx];
+                if (curr_body.stationary)
+                    continue;
+
                 Vector3 a = compute_accel(body_idx);
                 curr_body.tmp_v += a * (float) (ds[i] * dt);
                 curr_body.tmp_r += curr_body.tmp_v * (float) (cs[i] * dt);

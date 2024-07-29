@@ -21,6 +21,10 @@ public class Sphere : MonoBehaviour
     private int upd_cnt = 0;
 
     private MeshRenderer meshRenderer;
+    private Renderer sphere_renderer;
+    // private LineRenderer line_renderer;
+
+    public bool stationary = false;
 
     public void set_color(Color newColor)
     {
@@ -43,6 +47,11 @@ public class Sphere : MonoBehaviour
     {
         v = new_v;
         tmp_v = new_v;
+    }
+
+    public void set_stationary(bool state)
+    {
+        stationary = state;
     }
 
     public void set_m(double new_m)
