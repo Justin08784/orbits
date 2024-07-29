@@ -20,8 +20,17 @@ public class Sphere : MonoBehaviour
 
     private int upd_cnt = 0;
 
+    private MeshRenderer meshRenderer;
+
+    public void set_color(Color newColor)
+    {
+        GetComponent<Renderer>().material.color = newColor;
+    }
+
     void Awake()
     {
+        meshRenderer = GetComponent<MeshRenderer>();
+
         v = Vector3.zero;
         r = transform.position;
         tmp_v = v;

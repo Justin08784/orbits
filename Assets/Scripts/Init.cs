@@ -19,6 +19,9 @@ public class Init : MonoBehaviour
 
         sphere1.set_m(1.0);
         sphere2.set_m(0.1);
+
+        sphere1.set_color(Color.yellow);
+        sphere2.set_color(Color.cyan);
         GravityManager.register_body(sphere1);
         GravityManager.register_body(sphere2);
     }
