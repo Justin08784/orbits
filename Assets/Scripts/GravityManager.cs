@@ -38,13 +38,17 @@ public class GravityManager : MonoBehaviour
         }
     }
 
-    public static void register_body(Sphere sphere)
+    public static void register_body(Sphere sphere, bool is_point_mass=false, bool is_inf_mass=false)
     {
         bodies.Add(sphere);
+        sphere.point_mass = is_point_mass;
+        sphere.inf_mass = is_inf_mass;
     }
     Vector3 compute_accel(int body_idx)
     {
         Sphere curr_body = bodies[body_idx];
+        if (curr_body.inf_mass)
+            return Vector3.zero;
         Vector3 r = curr_body.r;
         Vector3 a = Vector3.zero;
 
@@ -53,6 +57,8 @@ public class GravityManager : MonoBehaviour
                 continue;
             
             Sphere other_body = bodies[i];
+            if (other_body.point_mass)
+                continue;
             Vector3 displacement = other_body.r - r;
 
             a += (float) Physical_Constants.g * (float) other_body.m * displacement * (float) Math.Pow(displacement.magnitude, -3.0);
@@ -80,8 +86,6 @@ public class GravityManager : MonoBehaviour
             for (int body_idx = 0; body_idx < bodies.Count; body_idx++) {
                 // compute tmp values using last substep's 'architectural' values
                 Sphere curr_body = bodies[body_idx];
-                if (curr_body.stationary)
-                    continue;
 
                 Vector3 a = compute_accel(body_idx);
                 curr_body.tmp_v += a * (float) (ds[i] * dt);

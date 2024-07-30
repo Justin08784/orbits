@@ -27,7 +27,8 @@ public class Sphere : MonoBehaviour
     private Renderer sphere_renderer;
     // private LineRenderer line_renderer;
 
-    public bool stationary = false;
+    public bool inf_mass = false; // experiences no grav. acceleration
+    public bool point_mass = false; // produces no grav. field
 
     public double radius;
 
@@ -61,10 +62,6 @@ public class Sphere : MonoBehaviour
         tmp_v = new_v;
     }
 
-    public void set_stationary(bool state)
-    {
-        stationary = state;
-    }
 
     public void set_m(double new_m)
     {

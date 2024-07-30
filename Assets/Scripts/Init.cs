@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Init : MonoBehaviour
@@ -28,9 +29,7 @@ public class Init : MonoBehaviour
         sphere2.set_color(Color.cyan);
         sphere3.set_color(Color.red);
 
-        sphere1.set_stationary(true);
-
-        GravityManager.register_body(sphere1);
+        GravityManager.register_body(sphere1, is_inf_mass: true);
         GravityManager.register_body(sphere2);
         GravityManager.register_body(sphere3);
     }
@@ -94,15 +93,14 @@ public class Init : MonoBehaviour
         sphere3.set_radius(Radii.jupiter);
         sphere4.set_radius(Radii.ganymede);
 
-        sphere1.set_stationary(true);
         // sphere3.set_stationary(true);
         // sphere4.set_stationary(true);
 
-        GravityManager.register_body(sphere1);
+        GravityManager.register_body(sphere1, is_inf_mass: true);
         GravityManager.register_body(sphere2);
-        GravityManager.register_body(sphere21);
+        GravityManager.register_body(sphere21, is_point_mass: true);
         GravityManager.register_body(sphere3);
-        GravityManager.register_body(sphere4);
+        GravityManager.register_body(sphere4, is_point_mass: true);
 
         // let camera follow first body
         curr_body_idx = 0;
@@ -165,9 +163,5 @@ When objects are too distant, have pointers indicating distances
 
 - Make an infinite-fuel/acceleration spaceship to travel dis shit
 
-
-- Stationary field -> rename to no_accel
-Create a 'no_field' that makes body behave like a point mass (i.e.
-does not create a field of its own)
 
 */
