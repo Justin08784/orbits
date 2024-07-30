@@ -75,7 +75,7 @@ public class Sphere : MonoBehaviour
     {
         Debug.Log(string.Format("body id: {0}, new_radius: {1}, unit_scale: {2}", body_idx, new_radius, Scene_Scaling.unit_scale));
         radius = (double) new_radius;
-        transform.localScale = Vector3.one * ((float) new_radius) / ((float) Scene_Scaling.unit_scale);
+        transform.localScale = Vector3.one * (float) ((double) (new_radius * Scene_Scaling.exag_radii) / (double) Scene_Scaling.unit_scale);
     }
 
     void FixedUpdate()

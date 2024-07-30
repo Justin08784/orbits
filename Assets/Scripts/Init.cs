@@ -58,6 +58,9 @@ public class Init : MonoBehaviour
         Sphere sphere1 = Instantiate(Sphere_Prefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<Sphere>();
         // earth
         Sphere sphere2 = Instantiate(Sphere_Prefab, new Vector3(Distances.earth, 0, 0), Quaternion.identity).GetComponent<Sphere>();
+        double earth_moon = 405500000;
+        // moon
+        Sphere sphere21 = Instantiate(Sphere_Prefab, new Vector3((float) (Distances.earth + earth_moon), 0, 0), Quaternion.identity).GetComponent<Sphere>();
         
         double sun_jupiter = 5.367 * Distances.earth;
         double jupiter_ganymede = 1071600000;
@@ -69,21 +72,25 @@ public class Init : MonoBehaviour
 
         sphere1.set_v(new Vector3(0, 0, 0));
         sphere2.set_v(new Vector3(0, 0, 29800f));
+        sphere21.set_v(new Vector3(0, 0, 29800+970));
         sphere3.set_v(new Vector3(0, 0, -12440f));
         sphere4.set_v(new Vector3(0, 0, -(12440+10880)));
         
         sphere1.set_m(Masses.sun);
         sphere2.set_m(Masses.earth);
+        sphere21.set_m(0.0123 * Masses.earth);
         sphere3.set_m(317.83 * Masses.earth);
         sphere4.set_m(0.025 * Masses.earth);
 
         sphere1.set_color(Color.yellow);
         sphere2.set_color(Color.cyan);
+        sphere21.set_color(Color.magenta);
         sphere3.set_color(Color.red);
         sphere4.set_color(Color.green);
 
         sphere1.set_radius(Radii.sun);
         sphere2.set_radius(Radii.earth);
+        sphere21.set_radius(1738000);
         sphere3.set_radius(Radii.jupiter);
         sphere4.set_radius(Radii.ganymede);
 
@@ -93,11 +100,13 @@ public class Init : MonoBehaviour
 
         GravityManager.register_body(sphere1);
         GravityManager.register_body(sphere2);
+        GravityManager.register_body(sphere21);
         GravityManager.register_body(sphere3);
         GravityManager.register_body(sphere4);
 
         // let camera follow first body
         curr_body_idx = 0;
+        Debug.Log("curr_body: 0");
     }
 
     public void Update()
@@ -110,7 +119,7 @@ public class Init : MonoBehaviour
         Sphere curr_body = GravityManager.bodies[curr_body_idx];
         
         Vector3 body_pos = curr_body.transform.position;
-        float offset = 100f * (float) (curr_body.radius / Radii.sun);
+        float offset = 1000f * (float) (curr_body.radius / Radii.sun);
         m_MainCamera.transform.position = new Vector3(body_pos.x, body_pos.y + offset, body_pos.z);
 
     }

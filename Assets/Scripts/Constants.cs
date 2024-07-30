@@ -3,6 +3,7 @@
 public class Scene_Scaling
 {
     public const long unit_scale = Distances.earth/1000; // metre equivalent of 1 unit
+    public const long exag_radii = 10; // exagerrate body radii by this factor
 }
 
 public class Masses
