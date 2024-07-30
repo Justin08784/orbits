@@ -10,6 +10,8 @@ public class Init : MonoBehaviour
     public Camera m_MainCamera;
     private int curr_body_idx; // currently being followed by camera
 
+    public double scroll = 1;
+
 
     private void preset_orbit_tmp_moon_capture()
     {
@@ -114,10 +116,19 @@ public class Init : MonoBehaviour
             Debug.Log("curr_body: " + curr_body_idx);
         }
 
+        if (Input.mouseScrollDelta.y != 0) {
+            Debug.Log(string.Format("scroll ({0}, {1})", Input.mouseScrollDelta.x, Input.mouseScrollDelta.y));
+            scroll *= (float) Math.Pow(2, Input.mouseScrollDelta.y / 10);
+        }
+
+        if (Input.GetKeyUp(KeyCode.R)) {
+            scroll = 1;
+        }
+
         Sphere curr_body = GravityManager.bodies[curr_body_idx];
         
         Vector3 body_pos = curr_body.transform.position;
-        float offset = 1000f * (float) (curr_body.radius / Radii.sun);
+        float offset = (float) scroll * 1000f * (float) (curr_body.radius / Radii.sun);
         m_MainCamera.transform.position = new Vector3(body_pos.x, body_pos.y + offset, body_pos.z);
 
     }
