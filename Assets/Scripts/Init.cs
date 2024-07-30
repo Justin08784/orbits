@@ -93,6 +93,31 @@ required to maintain circular orbit about a planet
 - Add an option to remove 'g' from compute_accel so that the current presets can be used
 
 - Simulate moons (and submoons?)
+Trying to represent ganymede and we seem to be encountering floating-point precision issues
+(actually im not sure sure about this...)
 
+ok there is SOME FP issues, however it is not overwhelming enough to put ganymede inside jupiter.
+In fact the positions seem RELATIVELY accurate.
+Then does unity have trouble rendering exact positions at the granularity required?
+(e.g. 
+jupiter at: 5.367, 0, 0
+and 
+ganymede at: -5.37416320356, 0, 0)
+
+
+- **IMPORTANT** Use vector3d for double precision
+<compute and store values in double precision; visualize using float precision>
+
+
+- Simulate everything in the background and... when a certain object is close
+enough to be visible, render it (with a new scene)
+When objects are too distant, have pointers indicating distances
+
+- Make an infinite-fuel/acceleration spaceship to travel dis shit
+
+
+- Stationary field -> rename to no_accel
+Create a 'no_field' that makes body behave like a point mass (i.e.
+does not create a field of its own)
 
 */
