@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 
@@ -70,9 +71,11 @@ public class Sphere : MonoBehaviour
         m = new_m;
     }
 
-    public void scale(float k)
+    public void set_radius(long new_radius)
     {
-        transform.localScale *= k;
+        Debug.Log(string.Format("body id: {0}, new_radius: {1}, unit_scale: {2}", body_idx, new_radius, Scene_Scaling.unit_scale));
+        radius = (double) new_radius;
+        transform.localScale = Vector3.one * ((float) new_radius) / ((float) Scene_Scaling.unit_scale);
     }
 
     void FixedUpdate()
@@ -96,7 +99,7 @@ public class Sphere : MonoBehaviour
         // line_renderer.SetPositions(position_history.ToArray());
         
         // Debug.Log(string.Format("<{2}> r: {0} // v: {1}", r, v, body_idx));
-        transform.position = r / Distances.earth;
+        transform.position = r / (float) Scene_Scaling.unit_scale;
         upd_cnt++;
     }
 }

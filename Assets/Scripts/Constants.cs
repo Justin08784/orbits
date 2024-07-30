@@ -1,4 +1,9 @@
-using Unity.Burst;
+
+
+public class Scene_Scaling
+{
+    public const long unit_scale = Distances.earth/1000; // metre equivalent of 1 unit
+}
 
 public class Masses
 {

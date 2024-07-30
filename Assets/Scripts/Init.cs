@@ -53,7 +53,7 @@ public class Init : MonoBehaviour
         m_MainCamera = Camera.main;
         //This enables Main Camera
         m_MainCamera.enabled = true;
-        
+
         // sun
         Sphere sphere1 = Instantiate(Sphere_Prefab, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<Sphere>();
         // earth
@@ -82,21 +82,10 @@ public class Init : MonoBehaviour
         sphere3.set_color(Color.red);
         sphere4.set_color(Color.green);
 
-        double bruh = 1.0/Distances.earth;
-        Debug.Log("bruh" + bruh);
-        // double bruh = 1000/Distances.earth;
-        float sun = (float) bruh * Radii.sun;
-        float earth = (float) bruh * Radii.earth;
-        float jupiter = (float) bruh * Radii.jupiter;
-        float ganymede = (float) bruh * Radii.ganymede;
-        sphere1.scale(sun);
-        sphere2.scale(earth);
-        sphere3.scale(jupiter);
-        sphere4.scale(ganymede);
-        sphere1.radius = Radii.sun;
-        sphere2.radius = Radii.earth;
-        sphere3.radius = Radii.jupiter;
-        sphere4.radius = Radii.ganymede;
+        sphere1.set_radius(Radii.sun);
+        sphere2.set_radius(Radii.earth);
+        sphere3.set_radius(Radii.jupiter);
+        sphere4.set_radius(Radii.ganymede);
 
         sphere1.set_stationary(true);
         // sphere3.set_stationary(true);
@@ -121,7 +110,7 @@ public class Init : MonoBehaviour
         Sphere curr_body = GravityManager.bodies[curr_body_idx];
         
         Vector3 body_pos = curr_body.transform.position;
-        float offset = 0.1f * (float) (curr_body.radius / Radii.sun);
+        float offset = 100f * (float) (curr_body.radius / Radii.sun);
         m_MainCamera.transform.position = new Vector3(body_pos.x, body_pos.y + offset, body_pos.z);
 
     }
