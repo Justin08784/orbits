@@ -5,7 +5,7 @@ using UnityEngine;
 public class GravityManager : MonoBehaviour
 {
     private static GravityManager Instance; // there should be only 1 manager
-    private static List<Sphere> bodies = new();
+    public static List<Sphere> bodies = new();
 
 
     /* integrator coeffs */
@@ -13,7 +13,7 @@ public class GravityManager : MonoBehaviour
     double[] cs; // displacement update coeffs
     double[] ds; // velocity update coeffs
 
-    private double dt = 3600;
+    private double dt = 60;
 
     private uint upd_cnt = 0;
 

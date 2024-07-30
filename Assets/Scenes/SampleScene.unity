@@ -247,6 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sphere_Prefab: {fileID: 7542758454560160788, guid: a82bdf22a5667414da3de2677da0ae86, type: 3}
   Gravity_Manager_Prefab: {fileID: 2143995702170013783, guid: f1976c271dff3469cbb9cae501313724, type: 3}
+  m_MainCamera: {fileID: 0}
 --- !u!4 &836323927
 Transform:
   m_ObjectHideFlags: 0
@@ -319,7 +320,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0

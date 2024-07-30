@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,6 +27,8 @@ public class Sphere : MonoBehaviour
     // private LineRenderer line_renderer;
 
     public bool stationary = false;
+
+    public double radius;
 
     public void set_color(Color newColor)
     {
@@ -69,6 +70,11 @@ public class Sphere : MonoBehaviour
         m = new_m;
     }
 
+    public void scale(float k)
+    {
+        transform.localScale *= k;
+    }
+
     void FixedUpdate()
     {
         // position_history.Add(new Vector3(0.01f * (float) upd_cnt, 0, 0));
@@ -89,7 +95,7 @@ public class Sphere : MonoBehaviour
 
         // line_renderer.SetPositions(position_history.ToArray());
         
-        Debug.Log(string.Format("<{2}> r: {0} // v: {1}", r, v, body_idx));
+        // Debug.Log(string.Format("<{2}> r: {0} // v: {1}", r, v, body_idx));
         transform.position = r / Distances.earth;
         upd_cnt++;
     }
